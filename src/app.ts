@@ -37,7 +37,7 @@ function mainMenuOptions() {
     {
       value: "4",
       label: "Remix",
-      hint: "Build Better Websites. Create modern, resilient user experiences with web fundamentals",
+      hint: "Build better websites. Create modern, resilient user experiences with web fundamentals",
     },
     {
       value: "5",
