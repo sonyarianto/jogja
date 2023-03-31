@@ -9,6 +9,7 @@ let createProjectClis: any = [
   { platform: "vuejs", cli: "npm init vue@latest" },
   { platform: "sveltekit", cli: "npm create svelte@latest" },
   { platform: "nuxtjs", cli: "npx create-nuxt-app" },
+  { platform: "remix", cli: "npx create-remix@latest" },
 ];
 
 export async function mainMenu(data: any) {
@@ -21,6 +22,11 @@ export async function mainMenu(data: any) {
     initialValue: data.selectedMainMenuValue,
     options: [
       {
+        value: "angular",
+        label: "Angular",
+        hint: "Deliver web apps with confidence",
+      },
+      {
         value: "nextjs",
         label: "Next.js",
         hint: "The React framework for the web",
@@ -29,6 +35,11 @@ export async function mainMenu(data: any) {
         value: "nuxtjs",
         label: "Nuxt.js",
         hint: "The intuitive Vue framework",
+      },
+      {
+        value: "remix",
+        label: "Remix",
+        hint: "Build Better Websites. Create modern, resilient user experiences with web fundamentals",
       },
       {
         value: "sveltekit",
