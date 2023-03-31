@@ -36,6 +36,10 @@ npm i -g jogja
 
 now you can call it by type `jogja` on your computer.
 
+## Screenshot
+
+![jogja](https://github.com/sonyarianto/jogja/blob/main/jogja.jpg?raw=true&78482374)
+
 ## License
 
 MIT
