@@ -3,7 +3,6 @@ import * as appConfig from "./config";
 import color from "picocolors";
 import { spawn } from "child_process";
 
-let appData: any;
 let createProjectClis: any = [
   { platform: "2", cli: "npx create-next-app@latest" },
   { platform: "3", cli: "npx create-nuxt-app" },
@@ -76,8 +75,6 @@ function mainMenuOptions() {
 }
 
 export async function mainMenu(data: any) {
-  appData = data;
-
   // construct menu options and show menu
 
   const selectedMenu = await select({
