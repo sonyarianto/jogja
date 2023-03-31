@@ -1,10 +1,7 @@
 import {
-  confirm,
   isCancel,
-  log,
   outro,
   select,
-  spinner,
   text,
 } from "@clack/prompts";
 import * as appConfig from "./config";
