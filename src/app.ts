@@ -1,9 +1,4 @@
-import {
-  isCancel,
-  outro,
-  select,
-  text,
-} from "@clack/prompts";
+import { isCancel, outro, select, text } from "@clack/prompts";
 import * as appConfig from "./config";
 import color from "picocolors";
 import { spawn } from "child_process";
@@ -54,7 +49,7 @@ function mainMenuOptions() {
       value: "6",
       label: "Vue.js",
       hint: "The progressive JavaScript framework",
-    }
+    },
   ];
 
   // sort options by label
