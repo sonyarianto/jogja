@@ -2,7 +2,7 @@
   "name": "jogja",
   "version": "0.1.2",
   "description": "Project and frameworks generator for busy and lazy people.",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "start": "jiti ./src/index.ts",
     "format": "prettier --write ./src",
