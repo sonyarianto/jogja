@@ -5,11 +5,12 @@ import { spawn } from "child_process";
 
 let appData: any;
 let createProjectClis: any = [
-  { platform: "nextjs", cli: "npx create-next-app@latest" },
-  { platform: "vuejs", cli: "npm init vue@latest" },
-  { platform: "sveltekit", cli: "npm create svelte@latest" },
-  { platform: "nuxtjs", cli: "npx create-nuxt-app" },
-  { platform: "remix", cli: "npx create-remix@latest" },
+  { platform: "2", cli: "npx create-next-app@latest" },
+  { platform: "6", cli: "npm init vue@latest" },
+  { platform: "5", cli: "npm create svelte@latest" },
+  { platform: "3", cli: "npx create-nuxt-app" },
+  { platform: "4", cli: "npx create-remix@latest" },
+  { platform: "7", cli: "npm create astro@latest" },
 ];
 
 export async function mainMenu(data: any) {
@@ -22,32 +23,37 @@ export async function mainMenu(data: any) {
     initialValue: data.selectedMainMenuValue,
     options: [
       {
-        value: "angular",
+        value: "1",
         label: "Angular",
         hint: "Deliver web apps with confidence",
       },
       {
-        value: "nextjs",
+        value: "7",
+        label: "Astro",
+        hint: "Build the web you want",
+      },
+      {
+        value: "2",
         label: "Next.js",
         hint: "The React framework for the web",
       },
       {
-        value: "nuxtjs",
+        value: "3",
         label: "Nuxt.js",
         hint: "The intuitive Vue framework",
       },
       {
-        value: "remix",
+        value: "4",
         label: "Remix",
         hint: "Build Better Websites. Create modern, resilient user experiences with web fundamentals",
       },
       {
-        value: "sveltekit",
+        value: "5",
         label: "SvelteKit",
         hint: "Rapidly developing robust, performant web applications using Svelte",
       },
       {
-        value: "vuejs",
+        value: "6",
         label: "Vue.js",
         hint: "The progressive JavaScript framework",
       },
