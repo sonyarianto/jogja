@@ -20,7 +20,7 @@ Project and frameworks generator for busy and lazy people.
 
 ## Overview
 
-I know there are so many web frameworks outhere, how about we have centralized tools to trigger create project for those frameworks. That's why I created `jogja`.
+I know there are so many web frameworks outhere. How about we have centralized tools to trigger create project for those frameworks? That's why I created `jogja`.
 
 ## Features
 
