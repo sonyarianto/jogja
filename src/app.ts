@@ -15,11 +15,11 @@ let createProjectClis: any = [
 
 function mainMenuOptions() {
   const options = [
-    {
-      value: "1",
-      label: "Angular",
-      hint: "Deliver web apps with confidence",
-    },
+    // {
+    //   value: "1",
+    //   label: "Angular",
+    //   hint: "Deliver web apps with confidence",
+    // },
     {
       value: "7",
       label: "Astro",
