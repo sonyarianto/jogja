@@ -11,8 +11,9 @@ const createProjectClis: any = [
   { platform: "svelte", cli: "npm create svelte@latest" },
   { platform: "vuejs", cli: "npm init vue@latest" },
   { platform: "astro", cli: "npm create astro@latest" },
-  { platform: "nestjs", cli: "npm i -g @nestjs/cli" },
-  { platform: "emberjs", cli: "npm install -g ember-cli" },
+  { platform: "nestjs", cli: "npx nest new" },
+  { platform: "emberjs", cli: "npx ember new" },
+  { platform: "gatsby", cli: "npx gatsby new" },
 ];
 
 const options = [
@@ -60,6 +61,11 @@ const options = [
     value: "emberjs",
     label: "Ember.js",
     hint: "A framework for ambitious web developers",
+  },
+  {
+    value: "gatsby",
+    label: "Gatsby",
+    hint: "The fastest frontend for the headless web",
   },
 ];
 
@@ -126,45 +132,17 @@ export async function mainMenu(data: any) {
 }
 
 function createProject(data: any) {
-  let child: any;
-
-  if (["nestjs", "emberjs"].includes(data.selectedProject)) {
-    child = spawn(
+  const child = spawn(
+    `${
       createProjectClis.find(
         (cli: any) => cli.platform === data.selectedProject
-      ).cli,
-      { stdio: "inherit", shell: true }
-    );
-    child.on("exit", () => {
-      let command: string = "";
-
-      if (data.selectedProject === "nestjs") {
-        command = "nest new";
-      } else if (data.selectedProject === "emberjs") {
-        command = "ember new";
-      }
-
-      const child2 = spawn(`${command} ${data.selectedProjectDir}`, {
-        stdio: "inherit",
-        shell: true,
-      });
-      child2.on("exit", () => {
-        quit();
-      });
-    });
-  } else {
-    child = spawn(
-      `${
-        createProjectClis.find(
-          (cli: any) => cli.platform === data.selectedProject
-        ).cli
-      } ${data.selectedProjectDir}`,
-      { stdio: "inherit", shell: true }
-    );
-    child.on("exit", () => {
-      quit();
-    });
-  }
+      ).cli
+    } ${data.selectedProjectDir}`,
+    { stdio: "inherit", shell: true }
+  );
+  child.on("exit", () => {
+    quit();
+  });
 }
 
 function quit() {
