@@ -4,6 +4,7 @@ import color from "picocolors";
 import { spawn } from "child_process";
 
 let createProjectClis: any = [
+  { platform: "1", cli: "npm init @angular" },
   { platform: "2", cli: "npx create-next-app@latest" },
   { platform: "3", cli: "npx create-nuxt-app" },
   { platform: "4", cli: "npx create-remix@latest" },
@@ -14,11 +15,11 @@ let createProjectClis: any = [
 
 function mainMenuOptions() {
   const options = [
-    // {
-    //   value: "1",
-    //   label: "Angular",
-    //   hint: "Deliver web apps with confidence",
-    // },
+    {
+      value: "1",
+      label: "Angular",
+      hint: "Deliver web apps with confidence",
+    },
     {
       value: "7",
       label: "Astro",
@@ -118,7 +119,11 @@ function createProject(data: any) {
       .cli
   } ${data.selectedProjectDir}`;
 
-  spawn(sshCommand, { stdio: "inherit", shell: true });
+  const child = spawn(sshCommand, { stdio: "inherit", shell: true });
+
+  child.on("exit", () => {
+    quit();
+  });
 }
 
 function quit() {
