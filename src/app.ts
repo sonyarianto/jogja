@@ -3,26 +3,12 @@ import * as appConfig from "./config";
 import color from "picocolors";
 import { spawn } from "child_process";
 
-const createProjectClis: any = [
-  { platform: "angular", cli: "npm init @angular" },
-  { platform: "nextjs", cli: "npx create-next-app@latest" },
-  { platform: "nuxt", cli: "npx create-nuxt-app" },
-  { platform: "remix", cli: "npx create-remix@latest" },
-  { platform: "svelte", cli: "npm create svelte@latest" },
-  { platform: "vuejs", cli: "npm init vue@latest" },
-  { platform: "astro", cli: "npm create astro@latest" },
-  { platform: "nestjs", cli: "npx nest new" },
-  { platform: "emberjs", cli: "npx ember new" },
-  { platform: "gatsby", cli: "npx gatsby new" },
-  { platform: "qwik", cli: "npm create qwik@latest" },
-  { platform: "sails", cli: "npx sails new" },
-];
-
 const options = [
   {
     value: "angular",
     label: "Angular",
     hint: "Deliver web apps with confidence",
+    cli: "npm init @angular",
     start_space: true,
     end_space: false,
   },
@@ -30,6 +16,7 @@ const options = [
     value: "nextjs",
     label: "Next.js",
     hint: "The React framework for the web",
+    cli: "npx create-next-app@latest",
     start_space: true,
     end_space: false,
   },
@@ -37,6 +24,7 @@ const options = [
     value: "nuxt",
     label: "Nuxt.js",
     hint: "The intuitive Vue framework",
+    cli: "npx create-nuxt-app",
     start_space: true,
     end_space: false,
   },
@@ -44,6 +32,7 @@ const options = [
     value: "remix",
     label: "Remix",
     hint: "Build better websites. Create modern, resilient user experiences with web fundamentals",
+    cli: "npx create-remix@latest",
     start_space: true,
     end_space: false,
   },
@@ -51,6 +40,7 @@ const options = [
     value: "svelte",
     label: "SvelteKit",
     hint: "Rapidly developing robust, performant web applications using Svelte",
+    cli: "npm create svelte@latest",
     start_space: false,
     end_space: false,
   },
@@ -58,6 +48,7 @@ const options = [
     value: "vuejs",
     label: "Vue.js",
     hint: "The progressive JavaScript framework",
+    cli: "npm init vue@latest",
     start_space: false,
     end_space: false,
   },
@@ -65,6 +56,7 @@ const options = [
     value: "astro",
     label: "Astro",
     hint: "Build the web you want",
+    cli: "npm create astro@latest",
     start_space: false,
     end_space: false,
   },
@@ -72,6 +64,7 @@ const options = [
     value: "nestjs",
     label: "NestJS",
     hint: "A progressive Node.js framework",
+    cli: "npx nest new",
     start_space: true,
     end_space: false,
   },
@@ -79,6 +72,7 @@ const options = [
     value: "emberjs",
     label: "Ember.js",
     hint: "A framework for ambitious web developers",
+    cli: "npx ember new",
     start_space: true,
     end_space: false,
   },
@@ -86,6 +80,7 @@ const options = [
     value: "gatsby",
     label: "Gatsby",
     hint: "The fastest frontend for the headless web",
+    cli: "npx gatsby new",
     start_space: true,
     end_space: false,
   },
@@ -93,6 +88,7 @@ const options = [
     value: "qwik",
     label: "Qwik",
     hint: "Framework reimagined for the edge!",
+    cli: "npm create qwik@latest",
     start_space: false,
     end_space: false,
   },
@@ -100,6 +96,15 @@ const options = [
     value: "sails",
     label: "Sails",
     hint: "Realtime MVC framework for Node.js",
+    cli: "npx sails new",
+    start_space: true,
+    end_space: false,
+  },
+  {
+    value: "vite",
+    label: "Vite",
+    hint: "Next Generation Frontend Tooling",
+    cli: "npm create vite@latest",
     start_space: true,
     end_space: false,
   },
@@ -126,6 +131,7 @@ function mainMenuOptions() {
     value: "quit",
     label: "Quit",
     hint: "Quit the application",
+    cli: "",
     start_space: false,
     end_space: false,
   });
@@ -197,9 +203,8 @@ function createProject(data: any) {
 
   const child = spawn(
     `${
-      createProjectClis.find(
-        (cli: any) => cli.platform === data.selectedProject.value
-      ).cli
+      options.find((option: any) => option.value === data.selectedProject.value)
+        ?.cli
     } ${selectedProjectDir}`,
     { stdio: "inherit", shell: true }
   );
