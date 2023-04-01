@@ -4,50 +4,56 @@ import color from "picocolors";
 import { spawn } from "child_process";
 
 const createProjectClis: any = [
-  { platform: "1", cli: "npm init @angular" },
-  { platform: "2", cli: "npx create-next-app@latest" },
-  { platform: "3", cli: "npx create-nuxt-app" },
-  { platform: "4", cli: "npx create-remix@latest" },
-  { platform: "5", cli: "npm create svelte@latest" },
-  { platform: "6", cli: "npm init vue@latest" },
-  { platform: "7", cli: "npm create astro@latest" },
+  { platform: "angular", cli: "npm init @angular" },
+  { platform: "nextjs", cli: "npx create-next-app@latest" },
+  { platform: "nuxt", cli: "npx create-nuxt-app" },
+  { platform: "remix", cli: "npx create-remix@latest" },
+  { platform: "svelte", cli: "npm create svelte@latest" },
+  { platform: "vuejs", cli: "npm init vue@latest" },
+  { platform: "astro", cli: "npm create astro@latest" },
+  { platform: "nestjs", cli: "npm i -g @nestjs/cli" },
 ];
 
 const options = [
   {
-    value: "1",
+    value: "angular",
     label: "Angular",
     hint: "Deliver web apps with confidence",
   },
   {
-    value: "7",
-    label: "Astro",
-    hint: "Build the web you want",
-  },
-  {
-    value: "2",
+    value: "nextjs",
     label: "Next.js",
     hint: "The React framework for the web",
   },
   {
-    value: "3",
+    value: "nuxt",
     label: "Nuxt.js",
     hint: "The intuitive Vue framework",
   },
   {
-    value: "4",
+    value: "remix",
     label: "Remix",
     hint: "Build better websites. Create modern, resilient user experiences with web fundamentals",
   },
   {
-    value: "5",
+    value: "svelte",
     label: "SvelteKit",
     hint: "Rapidly developing robust, performant web applications using Svelte",
   },
   {
-    value: "6",
+    value: "vuejs",
     label: "Vue.js",
     hint: "The progressive JavaScript framework",
+  },
+  {
+    value: "astro",
+    label: "Astro",
+    hint: "Build the web you want",
+  },
+  {
+    value: "nestjs",
+    label: "NestJS",
+    hint: "A progressive Node.js framework",
   },
 ];
 
@@ -79,7 +85,7 @@ export async function mainMenu(data: any) {
   // construct menu options and show menu
 
   const selectedMenu = await select({
-    message: "What kind of project do you want to create?",
+    message: "Which framework do you want to use?",
     initialValue: data.selectedMainMenuValue,
     options: mainMenuOptions(),
   });
@@ -93,10 +99,10 @@ export async function mainMenu(data: any) {
   }
 
   const selectedProjectDir = await text({
-    message: "Name of the project?",
+    message: "Project name?",
     placeholder: "./project-name",
     validate: (value: string) => {
-      if (value === "") return "Connection name cannot be empty";
+      if (value === "") return "Project name cannot be empty";
       if (value.includes(" ")) return "Spaces are not allowed";
     },
   });
@@ -114,16 +120,37 @@ export async function mainMenu(data: any) {
 }
 
 function createProject(data: any) {
-  const sshCommand = `${
-    createProjectClis.find((cli: any) => cli.platform === data.selectedProject)
-      .cli
-  } ${data.selectedProjectDir}`;
+  let child: any;
 
-  const child = spawn(sshCommand, { stdio: "inherit", shell: true });
-
-  child.on("exit", () => {
-    quit();
-  });
+  if (data.selectedProject === "nestjs") {
+    child = spawn(
+      createProjectClis.find(
+        (cli: any) => cli.platform === data.selectedProject
+      ).cli,
+      { stdio: "inherit", shell: true }
+    );
+    child.on("exit", () => {
+      const child2 = spawn(`nest new ${data.selectedProjectDir}`, {
+        stdio: "inherit",
+        shell: true,
+      });
+      child2.on("exit", () => {
+        quit();
+      });
+    });
+  } else {
+    child = spawn(
+      `${
+        createProjectClis.find(
+          (cli: any) => cli.platform === data.selectedProject
+        ).cli
+      } ${data.selectedProjectDir}`,
+      { stdio: "inherit", shell: true }
+    );
+    child.on("exit", () => {
+      quit();
+    });
+  }
 }
 
 function quit() {
