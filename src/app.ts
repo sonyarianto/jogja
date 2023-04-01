@@ -14,6 +14,7 @@ const createProjectClis: any = [
   { platform: "nestjs", cli: "npx nest new" },
   { platform: "emberjs", cli: "npx ember new" },
   { platform: "gatsby", cli: "npx gatsby new" },
+  { platform: "qwik", cli: "npm create qwik@latest" },
 ];
 
 const options = [
@@ -67,6 +68,11 @@ const options = [
     label: "Gatsby",
     hint: "The fastest frontend for the headless web",
   },
+  {
+    value: "qwik",
+    label: "Qwik",
+    hint: "Framework reimagined for the edge!",
+  },
 ];
 
 function mainMenuOptions() {
@@ -94,6 +100,8 @@ function mainMenuOptions() {
 }
 
 export async function mainMenu(data: any) {
+  let selectedProjectDir: any = "";
+
   // construct menu options and show menu
 
   const selectedMenu = await select({
@@ -110,17 +118,19 @@ export async function mainMenu(data: any) {
     quit();
   }
 
-  const selectedProjectDir = await text({
-    message: "Project name?",
-    placeholder: "./project-name",
-    validate: (value: string) => {
-      if (value === "") return "Project name cannot be empty";
-      if (value.includes(" ")) return "Spaces are not allowed";
-    },
-  });
+  if (selectedMenu !== "qwik") {
+    selectedProjectDir = await text({
+      message: "Project name?",
+      placeholder: "./project-name",
+      validate: (value: string) => {
+        if (value === "") return "Project name cannot be empty";
+        if (value.includes(" ")) return "Spaces are not allowed";
+      },
+    });
 
-  if (isCancel(selectedProjectDir)) {
-    quit();
+    if (isCancel(selectedProjectDir)) {
+      quit();
+    }
   }
 
   // handle menu selection
@@ -132,12 +142,18 @@ export async function mainMenu(data: any) {
 }
 
 function createProject(data: any) {
+  let selectedProjectDir: any = "";
+
+  if (data.selectedProjectDir !== "") {
+    selectedProjectDir = ` ${data.selectedProjectDir}`;
+  }
+
   const child = spawn(
     `${
       createProjectClis.find(
         (cli: any) => cli.platform === data.selectedProject
       ).cli
-    } ${data.selectedProjectDir}`,
+    } ${selectedProjectDir}`,
     { stdio: "inherit", shell: true }
   );
   child.on("exit", () => {
