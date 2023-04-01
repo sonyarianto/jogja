@@ -12,6 +12,7 @@ const createProjectClis: any = [
   { platform: "vuejs", cli: "npm init vue@latest" },
   { platform: "astro", cli: "npm create astro@latest" },
   { platform: "nestjs", cli: "npm i -g @nestjs/cli" },
+  { platform: "emberjs", cli: "npm i -g ember-cli" },
 ];
 
 const options = [
@@ -54,6 +55,11 @@ const options = [
     value: "nestjs",
     label: "NestJS",
     hint: "A progressive Node.js framework",
+  },
+  {
+    value: "emberjs",
+    label: "Ember.js",
+    hint: "A framework for ambitious web developers",
   },
 ];
 
@@ -122,7 +128,7 @@ export async function mainMenu(data: any) {
 function createProject(data: any) {
   let child: any;
 
-  if (data.selectedProject === "nestjs") {
+  if (["nestjs", "ember.js"].includes(data.selectedProject)) {
     child = spawn(
       createProjectClis.find(
         (cli: any) => cli.platform === data.selectedProject
@@ -130,7 +136,15 @@ function createProject(data: any) {
       { stdio: "inherit", shell: true }
     );
     child.on("exit", () => {
-      const child2 = spawn(`nest new ${data.selectedProjectDir}`, {
+      let command: string = "";
+
+      if (data.selectedProject === "nestjs") {
+        command = "nest new";
+      } else if (data.selectedProject === "emberjs") {
+        command = "ember new";
+      }
+
+      const child2 = spawn(`${command} ${data.selectedProjectDir}`, {
         stdio: "inherit",
         shell: true,
       });
