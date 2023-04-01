@@ -15,6 +15,7 @@ const createProjectClis: any = [
   { platform: "emberjs", cli: "npx ember new" },
   { platform: "gatsby", cli: "npx gatsby new" },
   { platform: "qwik", cli: "npm create qwik@latest" },
+  { platform: "sails", cli: "npx sails new" },
 ];
 
 const options = [
@@ -72,6 +73,11 @@ const options = [
     value: "qwik",
     label: "Qwik",
     hint: "Framework reimagined for the edge!",
+  },
+  {
+    value: "sails",
+    label: "Sails",
+    hint: "Realtime MVC framework for Node.js",
   },
 ];
 
