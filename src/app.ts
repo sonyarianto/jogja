@@ -1,4 +1,4 @@
-import { isCancel, outro, select, text } from "@clack/prompts";
+import { isCancel, log, outro, select, text } from "@clack/prompts";
 import * as appConfig from "./config";
 import color from "picocolors";
 import { spawn } from "child_process";
@@ -23,63 +23,89 @@ const options = [
     value: "angular",
     label: "Angular",
     hint: "Deliver web apps with confidence",
+    start_space: true,
+    end_space: false,
   },
   {
     value: "nextjs",
     label: "Next.js",
     hint: "The React framework for the web",
+    start_space: true,
+    end_space: false,
   },
   {
     value: "nuxt",
     label: "Nuxt.js",
     hint: "The intuitive Vue framework",
+    start_space: true,
+    end_space: false,
   },
   {
     value: "remix",
     label: "Remix",
     hint: "Build better websites. Create modern, resilient user experiences with web fundamentals",
+    start_space: true,
+    end_space: false,
   },
   {
     value: "svelte",
     label: "SvelteKit",
     hint: "Rapidly developing robust, performant web applications using Svelte",
+    start_space: false,
+    end_space: false,
   },
   {
     value: "vuejs",
     label: "Vue.js",
     hint: "The progressive JavaScript framework",
+    start_space: false,
+    end_space: false,
   },
   {
     value: "astro",
     label: "Astro",
     hint: "Build the web you want",
+    start_space: false,
+    end_space: false,
   },
   {
     value: "nestjs",
     label: "NestJS",
     hint: "A progressive Node.js framework",
+    start_space: true,
+    end_space: false,
   },
   {
     value: "emberjs",
     label: "Ember.js",
     hint: "A framework for ambitious web developers",
+    start_space: true,
+    end_space: false,
   },
   {
     value: "gatsby",
     label: "Gatsby",
     hint: "The fastest frontend for the headless web",
+    start_space: true,
+    end_space: false,
   },
   {
     value: "qwik",
     label: "Qwik",
     hint: "Framework reimagined for the edge!",
+    start_space: false,
+    end_space: false,
   },
   {
     value: "sails",
     label: "Sails",
     hint: "Realtime MVC framework for Node.js",
+    start_space: true,
+    end_space: false,
   },
 ];
+
+let selectedProject: any = null;
 
 function mainMenuOptions() {
   // sort options by label
@@ -100,6 +126,8 @@ function mainMenuOptions() {
     value: "quit",
     label: "Quit",
     hint: "Quit the application",
+    start_space: false,
+    end_space: false,
   });
 
   return options;
@@ -131,6 +159,9 @@ export async function mainMenu(data: any) {
       validate: (value: string) => {
         if (value === "") return "Project name cannot be empty";
         if (value.includes(" ")) return "Spaces are not allowed";
+        if (/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(value)) {
+          return "Special characters are not allowed";
+        }
       },
     });
 
@@ -139,15 +170,25 @@ export async function mainMenu(data: any) {
     }
   }
 
+  selectedProject = options.find(
+    (option: any) => option.value === selectedMenu
+  );
+
   // handle menu selection
 
   createProject({
-    selectedProject: selectedMenu,
+    selectedProject: selectedProject,
     selectedProjectDir: selectedProjectDir,
   });
 }
 
 function createProject(data: any) {
+  log.info(`🚀 Creating ${data.selectedProject.label} project...`);
+
+  if (data.selectedProject.start_space) {
+    console.log("\n");
+  }
+
   let selectedProjectDir: any = "";
 
   if (data.selectedProjectDir !== "") {
@@ -157,7 +198,7 @@ function createProject(data: any) {
   const child = spawn(
     `${
       createProjectClis.find(
-        (cli: any) => cli.platform === data.selectedProject
+        (cli: any) => cli.platform === data.selectedProject.value
       ).cli
     } ${selectedProjectDir}`,
     { stdio: "inherit", shell: true }
@@ -168,6 +209,10 @@ function createProject(data: any) {
 }
 
 function quit() {
+  if (selectedProject.end_space) {
+    console.log("\n");
+  }
+
   outro(
     `🙏 Thank you for using ${color.bgCyan(
       color.black(` ${appConfig.APP_NAME} `)
