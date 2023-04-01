@@ -209,7 +209,7 @@ function createProject(data: any) {
 }
 
 function quit() {
-  if (selectedProject.end_space) {
+  if (selectedProject && selectedProject.end_space) {
     console.log("\n");
   }
 
