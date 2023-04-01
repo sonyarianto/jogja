@@ -3,7 +3,7 @@ import * as appConfig from "./config";
 import color from "picocolors";
 import { spawn } from "child_process";
 
-let createProjectClis: any = [
+const createProjectClis: any = [
   { platform: "1", cli: "npm init @angular" },
   { platform: "2", cli: "npx create-next-app@latest" },
   { platform: "3", cli: "npx create-nuxt-app" },
@@ -13,45 +13,45 @@ let createProjectClis: any = [
   { platform: "7", cli: "npm create astro@latest" },
 ];
 
-function mainMenuOptions() {
-  const options = [
-    {
-      value: "1",
-      label: "Angular",
-      hint: "Deliver web apps with confidence",
-    },
-    {
-      value: "7",
-      label: "Astro",
-      hint: "Build the web you want",
-    },
-    {
-      value: "2",
-      label: "Next.js",
-      hint: "The React framework for the web",
-    },
-    {
-      value: "3",
-      label: "Nuxt.js",
-      hint: "The intuitive Vue framework",
-    },
-    {
-      value: "4",
-      label: "Remix",
-      hint: "Build better websites. Create modern, resilient user experiences with web fundamentals",
-    },
-    {
-      value: "5",
-      label: "SvelteKit",
-      hint: "Rapidly developing robust, performant web applications using Svelte",
-    },
-    {
-      value: "6",
-      label: "Vue.js",
-      hint: "The progressive JavaScript framework",
-    },
-  ];
+const options = [
+  {
+    value: "1",
+    label: "Angular",
+    hint: "Deliver web apps with confidence",
+  },
+  {
+    value: "7",
+    label: "Astro",
+    hint: "Build the web you want",
+  },
+  {
+    value: "2",
+    label: "Next.js",
+    hint: "The React framework for the web",
+  },
+  {
+    value: "3",
+    label: "Nuxt.js",
+    hint: "The intuitive Vue framework",
+  },
+  {
+    value: "4",
+    label: "Remix",
+    hint: "Build better websites. Create modern, resilient user experiences with web fundamentals",
+  },
+  {
+    value: "5",
+    label: "SvelteKit",
+    hint: "Rapidly developing robust, performant web applications using Svelte",
+  },
+  {
+    value: "6",
+    label: "Vue.js",
+    hint: "The progressive JavaScript framework",
+  },
+];
 
+function mainMenuOptions() {
   // sort options by label
 
   options.sort((a: any, b: any) => {
