@@ -12,7 +12,7 @@ const createProjectClis: any = [
   { platform: "vuejs", cli: "npm init vue@latest" },
   { platform: "astro", cli: "npm create astro@latest" },
   { platform: "nestjs", cli: "npm i -g @nestjs/cli" },
-  { platform: "emberjs", cli: "npm i -g ember-cli" },
+  { platform: "emberjs", cli: "npm install -g ember-cli" },
 ];
 
 const options = [
@@ -128,7 +128,7 @@ export async function mainMenu(data: any) {
 function createProject(data: any) {
   let child: any;
 
-  if (["nestjs", "ember.js"].includes(data.selectedProject)) {
+  if (["nestjs", "emberjs"].includes(data.selectedProject)) {
     child = spawn(
       createProjectClis.find(
         (cli: any) => cli.platform === data.selectedProject
