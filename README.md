@@ -14,9 +14,9 @@
  <img alt="npm" src="https://img.shields.io/npm/v/jogja">
 </a>
 
-# jogja
+# Jogja
 
-Project and frameworks generator for busy and lazy people.
+Project generator for web frameworks. Still for busy and lazy people.
 
 ## Overview
 
