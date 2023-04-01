@@ -108,6 +108,14 @@ const options = [
     start_space: true,
     end_space: false,
   },
+  {
+    value: "aurelia",
+    label: "Aurelia",
+    hint: "Simple. Powerful. Unobtrusive.",
+    cli: "npx aurelia-cli new",
+    start_space: true,
+    end_space: false,
+  },
 ];
 
 let selectedProject: any = null;

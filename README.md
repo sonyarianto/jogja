@@ -24,7 +24,7 @@ I know there are so many web frameworks outhere. How about we have centralized t
 
 ## Features
 
-- Trigger create projects for Next.js, SvelteKit, Vue.js, Astro, Remix, Nuxt and maybe more
+- Trigger create project for Next.js, SvelteKit, Vue.js, Astro, Remix, Nuxt and many more.
 
 ## Installation
 
@@ -38,7 +38,7 @@ now you can call it by type `jogja` on your computer.
 
 ## Screenshot
 
-![Jogja](https://github.com/sonyarianto/jogja/blob/main/jogja-0.1.6.jpg?raw=true)
+![Jogja](https://github.com/sonyarianto/jogja/blob/main/jogja-0.1.11.jpg?raw=true)
 
 ## License
 
