@@ -22,6 +22,10 @@ Project generator for web frameworks. Still for busy and lazy people.
 
 I know there are so many web frameworks outhere. How about we have centralized tools to trigger create project for those frameworks? That's why I created `Jogja`.
 
+## How it works?
+
+Every web framework has their own cli to create project. Jogja will trigger the cli to create project for you. So you don't need to install every cli for every framework. After you choose specific framework, Jogja will trigger the cli to create project for you along with more options.
+
 ## Features
 
 - Trigger create project for Next.js, SvelteKit, Vue.js, Astro, Remix, Nuxt and many more.
