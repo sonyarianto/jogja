@@ -14,17 +14,17 @@
  <img alt="npm" src="https://img.shields.io/npm/v/jogja">
 </a>
 
-# Jogja
+# jogja
 
 Project generator for web frameworks. Still for busy and lazy people.
 
 ## Overview
 
-I know there are so many web frameworks outhere. How about we have centralized tools to trigger create project for those frameworks? That's why I created `Jogja`.
+I know there are so many web frameworks outhere. How about we have centralized tools to trigger create project for those frameworks? That's why I created `jogja`.
 
 ## How it works?
 
-Every web framework has their own cli to create project. Jogja will trigger the cli to create project for you. So you don't need to install every cli for every framework. After you choose specific framework, Jogja will trigger the cli to create project for you along with more options.
+Every web framework has their own cli to create project. Jogja will trigger the cli to create project for you. So you don't need to install every cli for every framework. After you choose specific framework, `jogja` will trigger the cli to create project for you along with more options.
 
 ## Features
 
