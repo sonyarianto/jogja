@@ -116,6 +116,14 @@ const options = [
     start_space: true,
     end_space: false,
   },
+  {
+    value: "solidstart",
+    label: "SolidStart",
+    hint: "The Solid app framework",
+    cli: "npm init solid@latest",
+    start_space: false,
+    end_space: false,
+  },
 ];
 
 let selectedProject: any = null;
