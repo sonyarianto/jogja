@@ -124,6 +124,14 @@ const options = [
     start_space: false,
     end_space: false,
   },
+  {
+    value: "preact",
+    label: "Preact",
+    hint: "A different kind of library",
+    cli: "npx preact-cli create default",
+    start_space: true,
+    end_space: false,
+  },
 ];
 
 let selectedProject: any = null;
