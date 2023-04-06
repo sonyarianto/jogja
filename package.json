@@ -1,6 +1,6 @@
 {
   "name": "jogja",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "Project generator for web frameworks. Still for busy and lazy people.",
   "main": "./dist/index.js",
   "scripts": {
