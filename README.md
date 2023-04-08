@@ -42,7 +42,7 @@ now you can call it by type `jogja` on your computer.
 
 ## Screenshot
 
-![Jogja](https://github.com/sonyarianto/jogja/blob/main/jogja-0.1.11.jpg?raw=true)
+![Jogja](https://github.com/sonyarianto/jogja/blob/main/jogja-0.1.15.jpg?raw=true)
 
 ## License
 
