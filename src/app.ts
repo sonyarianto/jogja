@@ -1,5 +1,5 @@
 import { isCancel, log, outro, select, text } from "@clack/prompts";
-import { _ as appConfig } from "./config";
+import { appName } from "./config";
 import color from "picocolors";
 import { spawn } from "child_process";
 
@@ -217,10 +217,6 @@ function createProject(project: Project) {
 }
 
 function quit() {
-  outro(
-    `🙏 Thank you for using ${color.bgCyan(
-      color.black(` ${appConfig.name} `)
-    )}!`
-  );
+  outro(`🙏 Thank you for using ${color.bgCyan(color.black(` ${appName} `))}!`);
   process.exit(0);
 }
