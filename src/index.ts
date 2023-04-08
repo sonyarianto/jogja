@@ -2,21 +2,19 @@
 
 import { intro } from "@clack/prompts";
 import color from "picocolors";
-import * as appConfig from "./config";
+import { _ as appConfig } from "./config";
 import { mainMenu } from "./app";
 import { cli } from "cleye";
 
 async function main() {
   const _ = cli({
-    name: appConfig.APP_NAME,
-    version: appConfig.APP_VERSION,
+    name: appConfig.name,
+    version: appConfig.version,
   });
 
-  intro(`${color.bgCyan(color.black(` ${appConfig.APP_NAME} `))}`);
+  intro(`${color.bgCyan(color.black(` ${appConfig.name} `))}`);
 
-  const data = { selectedMainMenuValue: "adonisjs" };
-
-  mainMenu(data);
+  mainMenu();
 }
 
 main();

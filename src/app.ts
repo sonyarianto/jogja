@@ -1,161 +1,137 @@
 import { isCancel, log, outro, select, text } from "@clack/prompts";
-import * as appConfig from "./config";
+import { _ as appConfig } from "./config";
 import color from "picocolors";
 import { spawn } from "child_process";
 
-const options = [
+type ProjectType = {
+  value: string;
+  label: string;
+  hint: string;
+  cli: string;
+};
+
+type ProjectName = string | symbol;
+
+type Project = {
+  type: ProjectType | null | undefined;
+  name: ProjectName;
+};
+
+const projectTypeOptions = [
   {
     value: "angular",
     label: "Angular",
     hint: "Deliver web apps with confidence",
     cli: "npm init @angular",
-    start_space: true,
-    end_space: false,
   },
   {
     value: "nextjs",
     label: "Next.js",
     hint: "The React framework for the web",
     cli: "npx create-next-app@latest",
-    start_space: true,
-    end_space: false,
   },
   {
     value: "nuxt",
     label: "Nuxt.js",
     hint: "The intuitive Vue framework",
     cli: "npx create-nuxt-app",
-    start_space: true,
-    end_space: false,
   },
   {
     value: "remix",
     label: "Remix",
     hint: "Build better websites. Create modern, resilient user experiences with web fundamentals",
     cli: "npx create-remix@latest",
-    start_space: true,
-    end_space: false,
   },
   {
     value: "svelte",
     label: "SvelteKit",
     hint: "Rapidly developing robust, performant web applications using Svelte",
     cli: "npm create svelte@latest",
-    start_space: false,
-    end_space: false,
   },
   {
     value: "vuejs",
     label: "Vue.js",
     hint: "The progressive JavaScript framework",
     cli: "npm init vue@latest",
-    start_space: false,
-    end_space: false,
   },
   {
     value: "astro",
     label: "Astro",
     hint: "Build the web you want",
     cli: "npm create astro@latest",
-    start_space: false,
-    end_space: false,
   },
   {
     value: "nestjs",
     label: "NestJS",
     hint: "A progressive Node.js framework",
     cli: "npx nest new",
-    start_space: true,
-    end_space: false,
   },
   {
     value: "emberjs",
     label: "Ember.js",
     hint: "A framework for ambitious web developers",
     cli: "npx ember new",
-    start_space: true,
-    end_space: false,
   },
   {
     value: "gatsby",
     label: "Gatsby",
     hint: "The fastest frontend for the headless web",
     cli: "npx gatsby new",
-    start_space: true,
-    end_space: false,
   },
   {
     value: "qwik",
     label: "Qwik",
     hint: "Framework reimagined for the edge!",
     cli: "npm create qwik@latest",
-    start_space: false,
-    end_space: false,
   },
   {
     value: "sails",
     label: "Sails",
     hint: "Realtime MVC framework for Node.js",
     cli: "npx sails new",
-    start_space: true,
-    end_space: false,
   },
   {
     value: "vite",
     label: "Vite",
     hint: "Next Generation Frontend Tooling",
     cli: "npm create vite@latest",
-    start_space: true,
-    end_space: false,
   },
   {
     value: "aurelia",
     label: "Aurelia",
     hint: "Simple. Powerful. Unobtrusive.",
     cli: "npx aurelia-cli new",
-    start_space: true,
-    end_space: false,
   },
   {
     value: "solidstart",
     label: "SolidStart",
     hint: "The Solid app framework",
     cli: "npm init solid@latest",
-    start_space: false,
-    end_space: false,
   },
   {
     value: "preact",
     label: "Preact",
     hint: "A different kind of library",
     cli: "npx preact-cli create default",
-    start_space: true,
-    end_space: false,
   },
   {
     value: "createreactapp",
     label: "React (create-react-app)",
     hint: "Set up a modern web app by running one command",
     cli: "npx create-react-app",
-    start_space: true,
-    end_space: false,
   },
   {
     value: "adonisjs",
     label: "AdonisJS",
     hint: "A fully featured web framework for Node.js",
     cli: "npm init adonis-ts-app@latest",
-    start_space: false,
-    end_space: false,
   },
 ];
 
-let selectedProject: any = null;
-
-function mainMenuOptions() {
+function mainMenuOptions(projectTypeOptions: ProjectType[]): ProjectType[] {
   // sort options by label
 
-  options.sort((a: any, b: any) => {
+  projectTypeOptions.sort((a: ProjectType, b: ProjectType) => {
     if (a.label < b.label) {
       return -1;
     }
@@ -167,39 +143,42 @@ function mainMenuOptions() {
 
   // add quit option
 
-  options.push({
+  projectTypeOptions.push({
     value: "quit",
     label: "Quit",
-    hint: "Quit the application",
+    hint: "",
     cli: "",
-    start_space: false,
-    end_space: false,
   });
 
-  return options;
+  return projectTypeOptions;
 }
 
-export async function mainMenu(data: any) {
-  let selectedProjectDir: any = "";
-
+export async function mainMenu(): Promise<void> {
   // construct menu options and show menu
 
-  const selectedMenu = await select({
+  const selectedMenuValue = await select({
     message: "Which framework do you want to use?",
-    initialValue: data.selectedMainMenuValue,
-    options: mainMenuOptions(),
+    options: mainMenuOptions(projectTypeOptions),
   });
 
-  if (isCancel(selectedMenu)) {
+  if (isCancel(selectedMenuValue)) {
     quit();
   }
 
-  if (selectedMenu === "quit") {
+  if (selectedMenuValue === "quit") {
     quit();
   }
 
-  if (selectedMenu !== "qwik") {
-    selectedProjectDir = await text({
+  let selectedProjectType: ProjectType | null | undefined = null;
+
+  selectedProjectType = projectTypeOptions.find(
+    (option: ProjectType) => option.value === selectedMenuValue
+  );
+
+  let selectedProjectName: ProjectName = "";
+
+  if (selectedMenuValue !== "qwik") {
+    selectedProjectName = await text({
       message: "Project name?",
       placeholder: "./project-name",
       validate: (value: string) => {
@@ -211,56 +190,36 @@ export async function mainMenu(data: any) {
       },
     });
 
-    if (isCancel(selectedProjectDir)) {
+    if (isCancel(selectedProjectName)) {
       quit();
     }
   }
 
-  selectedProject = options.find(
-    (option: any) => option.value === selectedMenu
-  );
-
-  // handle menu selection
+  // create project
 
   createProject({
-    selectedProject: selectedProject,
-    selectedProjectDir: selectedProjectDir,
+    type: selectedProjectType,
+    name: selectedProjectName,
   });
 }
 
-function createProject(data: any) {
-  log.info(`🚀 Creating ${data.selectedProject.label} project...`);
+function createProject(project: Project) {
+  log.info(`🚀 Creating ${project.type?.label} project...\n`);
 
-  if (data.selectedProject.start_space) {
-    console.log("\n");
-  }
+  const child = spawn(`${project.type?.cli} ${project.name as string}`, {
+    stdio: "inherit",
+    shell: true,
+  });
 
-  let selectedProjectDir: any = "";
-
-  if (data.selectedProjectDir !== "") {
-    selectedProjectDir = ` ${data.selectedProjectDir}`;
-  }
-
-  const child = spawn(
-    `${
-      options.find((option: any) => option.value === data.selectedProject.value)
-        ?.cli
-    } ${selectedProjectDir}`,
-    { stdio: "inherit", shell: true }
-  );
   child.on("exit", () => {
     quit();
   });
 }
 
 function quit() {
-  if (selectedProject && selectedProject.end_space) {
-    console.log("\n");
-  }
-
   outro(
     `🙏 Thank you for using ${color.bgCyan(
-      color.black(` ${appConfig.APP_NAME} `)
+      color.black(` ${appConfig.name} `)
     )}!`
   );
   process.exit(0);
