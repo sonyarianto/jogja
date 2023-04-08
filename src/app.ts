@@ -132,6 +132,14 @@ const options = [
     start_space: true,
     end_space: false,
   },
+  {
+    value: "createreactapp",
+    label: "React (create-react-app)",
+    hint: "Set up a modern web app by running one command",
+    cli: "npx create-react-app",
+    start_space: true,
+    end_space: false,
+  },
 ];
 
 let selectedProject: any = null;
