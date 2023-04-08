@@ -197,7 +197,7 @@ export async function mainMenu(data: any) {
       validate: (value: string) => {
         if (value === "") return "Project name cannot be empty";
         if (value.includes(" ")) return "Spaces are not allowed";
-        if (/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(value)) {
+        if (/[~`!#$%\^&*+=\[\]\\';,/{}|\\":<>\?]/g.test(value)) {
           return "Special characters are not allowed";
         }
       },
