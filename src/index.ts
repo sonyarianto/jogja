@@ -14,7 +14,7 @@ async function main() {
 
   intro(`${color.bgCyan(color.black(` ${appConfig.APP_NAME} `))}`);
 
-  const data = { selectedMainMenuValue: "angular" };
+  const data = { selectedMainMenuValue: "adonisjs" };
 
   mainMenu(data);
 }

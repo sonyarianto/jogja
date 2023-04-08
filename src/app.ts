@@ -140,6 +140,14 @@ const options = [
     start_space: true,
     end_space: false,
   },
+  {
+    value: "adonisjs",
+    label: "AdonisJS",
+    hint: "A fully featured web framework for Node.js",
+    cli: "npm init adonis-ts-app@latest",
+    start_space: false,
+    end_space: false,
+  },
 ];
 
 let selectedProject: any = null;
