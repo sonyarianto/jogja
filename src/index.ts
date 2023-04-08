@@ -2,7 +2,7 @@
 
 import { intro } from "@clack/prompts";
 import color from "picocolors";
-import { appName, appVersion } from "./config";
+import { appName, appVersion, projectTypeOptions } from "./config";
 import { mainMenu } from "./app";
 import { cli } from "cleye";
 
@@ -14,7 +14,7 @@ async function main() {
 
   intro(`${color.bgCyan(color.black(` ${appName} `))}`);
 
-  mainMenu();
+  mainMenu(projectTypeOptions);
 }
 
 main();

@@ -18,7 +18,9 @@
   "keywords": [
     "project",
     "generator",
-    "framework"
+    "framework",
+    "tooling",
+    "cli"
   ],
   "author": "Sony Arianto Kurniawan <sony@sony-ak.com>",
   "license": "MIT",
