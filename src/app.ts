@@ -66,22 +66,52 @@ export async function mainMenu(options: ProjectType[]): Promise<void> {
 
   let selectedProjectName: ProjectName = "";
 
-  if (selectedMenuValue !== "qwik") {
-    selectedProjectName = await text({
-      message: "Project name?",
-      placeholder: "./project-name",
-      validate: (value: string) => {
-        if (value === "") return "Project name cannot be empty";
-        if (value.includes(" ")) return "Spaces are not allowed";
-        if (/[~`!#$%\^&*+=\[\]\\';,/{}|\\":<>\?]/g.test(value)) {
-          return "Special characters are not allowed";
-        }
-      },
-    });
+  switch (selectedMenuValue) {
+    case "qwik":
+      // can't use project name since qwik not support it on the cli parameter yet
+      break;
+    case "solidjs":
+      // show options js or ts
 
-    if (isCancel(selectedProjectName)) {
-      quit();
-    }
+      const selectedSolidJsLangType = await select({
+        message: "Which language type?",
+        options: [
+          { value: "js", label: "JavaScript", hint: "" },
+          { value: "ts", label: "TypeScript", hint: "" },
+        ],
+      });
+
+      if (isCancel(selectedSolidJsLangType)) {
+        quit();
+      }
+
+      if (selectedProjectType) {
+        switch (selectedSolidJsLangType) {
+          case "js":
+            selectedProjectType.cli = `npx degit solidjs/templates/js`;
+            break;
+          case "ts":
+            selectedProjectType.cli = `npx degit solidjs/templates/ts`;
+            break;
+        }
+      }
+    default:
+      selectedProjectName = await text({
+        message: "Project name?",
+        placeholder: "./project-name",
+        validate: (value: string) => {
+          if (value === "") return "Project name cannot be empty";
+          if (value.includes(" ")) return "Spaces are not allowed";
+          if (/[~`!#$%\^&*+=\[\]\\';,/{}|\\":<>\?]/g.test(value)) {
+            return "Special characters are not allowed";
+          }
+        },
+      });
+
+      if (isCancel(selectedProjectName)) {
+        quit();
+      }
+      break;
   }
 
   // create project
@@ -101,7 +131,16 @@ function createProject(project: Project) {
   });
 
   child.on("exit", () => {
-    quit();
+    switch (project.type?.value) {
+      case "solidjs":
+        console.log(`\nWhat to do next?`);
+        console.log(`1. cd ${project.name as string}`);
+        console.log(`2. npm install`);
+        console.log(`3. npm run dev\n`);
+      default:
+        quit();
+        break;
+    }
   });
 }
 

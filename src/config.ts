@@ -112,4 +112,10 @@ export const projectTypeOptions = [
     hint: "A fully featured web framework for Node.js",
     cli: "npm init adonis-ts-app@latest",
   },
+  {
+    value: "solidjs",
+    label: "SolidJS",
+    hint: "Reactive Javascript Library",
+    cli: "",
+  },
 ];
