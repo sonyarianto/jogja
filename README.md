@@ -44,6 +44,12 @@ now you can call it by type `jogja` on your computer.
 
 ![Jogja](https://github.com/sonyarianto/jogja/blob/main/jogja-0.2.3.jpg?raw=true)
 
+## FAQs
+
+- **How to update?** Just run `npm i -g jogja` again. It will update the package to the latest version.
+- **How to add new framework?** You can create PR to add new framework. Or you can create issue to request new framework.
+- **I want to install non-JavaScript framework. Can I?** You can't at the moment. Support for other languages/frameworks will be added in the future.
+
 ## License
 
 MIT
