@@ -118,4 +118,10 @@ export const projectTypeOptions = [
     hint: "Reactive Javascript Library",
     cli: "",
   },
+  {
+    value: "inferno",
+    label: "Inferno",
+    hint: "An extremely fast, React-like JavaScript library",
+    cli: "npx degit infernojs/inferno-boilerplate",
+  },
 ];

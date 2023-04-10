@@ -133,15 +133,28 @@ function createProject(project: Project) {
   child.on("exit", () => {
     switch (project.type?.value) {
       case "solidjs":
-        console.log(`\nWhat to do next?`);
-        console.log(`1. cd ${project.name as string}`);
-        console.log(`2. npm install`);
-        console.log(`3. npm run dev\n`);
+        solidJsOnFinished(project);
+      case "inferno":
+        infernoOnFinished(project);
       default:
         quit();
         break;
     }
   });
+}
+
+function solidJsOnFinished(project: Project) {
+  console.log(`\nWhat to do next?`);
+  console.log(`1. cd ${project.name as string}`);
+  console.log(`2. npm install`);
+  console.log(`3. npm run dev\n`);
+}
+
+function infernoOnFinished(project: Project) {
+  console.log(`\nWhat to do next?`);
+  console.log(`1. cd ${project.name as string}`);
+  console.log(`2. npm install`);
+  console.log(`3. npm run start\n`);
 }
 
 function quit() {
