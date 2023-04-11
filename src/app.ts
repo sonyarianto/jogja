@@ -95,6 +95,31 @@ export async function mainMenu(options: ProjectType[]): Promise<void> {
             break;
         }
       }
+    case "react_redux":
+      // show options js or ts
+
+      const selectedReactReduxLangType = await select({
+        message: "Which language type?",
+        options: [
+          { value: "js", label: "JavaScript", hint: "" },
+          { value: "ts", label: "TypeScript", hint: "" },
+        ],
+      });
+
+      if (isCancel(selectedReactReduxLangType)) {
+        quit();
+      }
+
+      if (selectedProjectType) {
+        switch (selectedReactReduxLangType) {
+          case "js":
+            selectedProjectType.cli = `npx create-react-app --template redux`;
+            break;
+          case "ts":
+            selectedProjectType.cli = `npx create-react-app --template redux-typescript`;
+            break;
+        }
+      }
     default:
       selectedProjectName = await text({
         message: "Project name?",

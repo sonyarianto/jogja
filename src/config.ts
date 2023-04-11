@@ -124,4 +124,10 @@ export const projectTypeOptions = [
     hint: "An extremely fast, React-like JavaScript library",
     cli: "npx degit infernojs/inferno-boilerplate",
   },
+  {
+    value: "react_redux",
+    label: "React Redux",
+    hint: "A predictable state container for JavaScript apps",
+    cli: "",
+  },
 ];
