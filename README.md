@@ -38,7 +38,7 @@ Install it globally
 npm i -g jogja
 ```
 
-now you can call it by type `jogja` on your computer.
+Now you can call it by type `jogja` on your computer. Use keyboard (up and down key) to select options.
 
 ## Screenshot
 
@@ -49,6 +49,10 @@ now you can call it by type `jogja` on your computer.
 - **How to update?** Just run `npm i -g jogja` again. It will update the package to the latest version.
 - **How to add new framework?** You can create PR to add new framework. Or you can create issue to request new framework.
 - **I want to install non-JavaScript framework. Can I?** You can't at the moment. Support for other languages/frameworks will be added in the future.
+
+## Known Issues
+
+- When we run `jogja` on the terminal with small height, the select options gets buggy and makes user experience bad. Still don't know to handle this. Quick solution is make the terminal full screen.
 
 ## License
 
