@@ -130,4 +130,16 @@ export const projectTypeOptions = [
     hint: "A predictable state container for JavaScript apps",
     cli: "",
   },
+  {
+    value: "expressjs",
+    label: "Express.js",
+    hint: "Node.js web application framework",
+    cli: "npx express-generator",
+  },
+  {
+    value: "nx",
+    label: "Nx",
+    hint: "Smart, fast and extensible build system",
+    cli: "npx create-nx-workspace@latest",
+  },
 ];

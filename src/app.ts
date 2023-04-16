@@ -2,6 +2,7 @@ import { isCancel, log, outro, select, text } from "@clack/prompts";
 import { appName } from "./config";
 import color from "picocolors";
 import { spawn } from "child_process";
+import { paginate } from "./utils";
 
 type ProjectType = {
   value: string;
@@ -17,6 +18,8 @@ type Project = {
   name: ProjectName;
 };
 
+let page: number = 1;
+
 function mainMenuOptions(projectTypeOptions: ProjectType[]): ProjectType[] {
   // sort options by label
 
@@ -30,11 +33,46 @@ function mainMenuOptions(projectTypeOptions: ProjectType[]): ProjectType[] {
     return 0;
   });
 
+  const data = paginate(projectTypeOptions, 8, page);
+
+  projectTypeOptions = data.data;
+
+  if (page > 1) {
+    // add previous page option
+
+    projectTypeOptions.unshift({
+      value: "previouspage",
+      label: `👈 PREV PAGE`,
+      hint: "",
+      cli: "",
+    });
+  }
+
+  if (!data.is_last_page) {
+    // add next page option
+
+    projectTypeOptions.push({
+      value: "nextpage",
+      label: `👉 NEXT PAGE`,
+      hint: "",
+      cli: "",
+    });
+  }
+
+  // add search by free text option
+
+  projectTypeOptions.unshift({
+    value: "search",
+    label: `🔍 SEARCH`,
+    hint: "",
+    cli: "",
+  });
+
   // add quit option
 
   projectTypeOptions.push({
     value: "quit",
-    label: "Quit",
+    label: `👋 QUIT`,
     hint: "",
     cli: "",
   });
@@ -58,6 +96,50 @@ export async function mainMenu(options: ProjectType[]): Promise<void> {
     quit();
   }
 
+  if (selectedMenuValue === "nextpage") {
+    page++;
+
+    mainMenu(options);
+    return;
+  }
+
+  if (selectedMenuValue === "previouspage") {
+    page--;
+
+    mainMenu(options);
+    return;
+  }
+
+  if (selectedMenuValue === "search") {
+    const searchValue = await text({
+      message: "Search by free text?",
+      placeholder:
+        "e.g. react or redux or vue or svelte or any other framework name",
+      validate: (value: string) => {
+        if (value.trim() === "") return "Please enter a valid search term";
+      },
+    });
+
+    if (isCancel(searchValue)) {
+      quit();
+    }
+
+    if (searchValue) {
+      options = options.filter((option: ProjectType) =>
+        option.label
+          .toLowerCase()
+          .includes((searchValue as string).toLowerCase())
+      );
+
+      if (options.length === 0) {
+        log.info(`No results found for ${searchValue as string}`);
+      }
+    }
+
+    mainMenu(options);
+    return;
+  }
+
   let selectedProjectType: ProjectType | null | undefined = null;
 
   selectedProjectType = options.find(
@@ -68,7 +150,8 @@ export async function mainMenu(options: ProjectType[]): Promise<void> {
 
   switch (selectedMenuValue) {
     case "qwik":
-      // can't use project name since qwik not support it on the cli parameter yet
+    case "nx":
+      // for qwik and nx, the project name will be handled by the cli itself
       break;
     case "solidjs":
       // show options js or ts
@@ -125,7 +208,7 @@ export async function mainMenu(options: ProjectType[]): Promise<void> {
         message: "Project name?",
         placeholder: "./project-name",
         validate: (value: string) => {
-          if (value === "") return "Project name cannot be empty";
+          if (value.trim() === "") return "Project name cannot be empty";
           if (value.includes(" ")) return "Spaces are not allowed";
           if (/[~`!#$%\^&*+=\[\]\\';,/{}|\\":<>\?]/g.test(value)) {
             return "Special characters are not allowed";
