@@ -51,10 +51,6 @@ Now you can call it by type `jogja` on your computer. Use keyboard (up and down 
 - **I want to install non-JavaScript framework. Can I?** You can't at the moment. Support for other languages/frameworks will be added in the future.
 - **Why the name is Jogja?** Jogja a.k.a Yogyakarta is the name of city in Indonesia. I want to make this project as a tribute to the city.
 
-## Known Issues
-
-- When we run `jogja` on the terminal with small height, the select options gets buggy and makes user experience bad. Still don't know to handle this. Quick solution is make the terminal full screen.
-
 ## License
 
 MIT
