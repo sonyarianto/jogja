@@ -49,7 +49,7 @@ Now you can call it by type `jogja` on your computer. Use keyboard (up and down 
 - **How to update?** Just run `npm i -g jogja` again. It will update the package to the latest version.
 - **How to add new framework?** You can create PR to add new framework. Or you can create issue to request new framework.
 - **I want to install non-JavaScript framework. Can I?** You can't at the moment. Support for other languages/frameworks will be added in the future.
-- **Why the name is Jogja?** Jogja a.k.a Yogyakarta is the name of city in Indonesia. I want to make this project as a tribute to my city.
+- **Why the name is Jogja?** Jogja a.k.a Yogyakarta is the name of city in Indonesia. I want to make this project as a tribute to the city.
 
 ## Known Issues
 
