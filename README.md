@@ -16,7 +16,7 @@
 
 # jogja
 
-Project generator for web frameworks. Still for busy and lazy people.
+Project generator for web frameworks. It provides scaffolding for your apps. Still for busy and lazy people.
 
 ## Overview
 
