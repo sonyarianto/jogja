@@ -1,14 +1,16 @@
 import { isCancel, log, outro, select, text } from "@clack/prompts";
-import { appName } from "./config";
+import { appName, dataPerPage } from "./config";
 import color from "picocolors";
 import { spawn } from "child_process";
 import { paginate } from "./utils";
 
 type ProjectType = {
   value: string;
-  label: string;
+  name: string;
   hint: string;
   cli: string;
+  category: string;
+  label: string;
 };
 
 type ProjectName = string | symbol;
@@ -18,40 +20,54 @@ type Project = {
   name: ProjectName;
 };
 
-let page: number = 1;
+let pageMainMenuOptions: number = 1;
+let isSearch: boolean = false;
 
-function mainMenuOptions(projectTypeOptions: ProjectType[]): ProjectType[] {
-  // sort options by label
+function mainMenuOptions(
+  projectTypeOptions: ProjectType[],
+  searchTerm?: string
+): ProjectType[] {
+  // sort options by name
 
   projectTypeOptions.sort((a: ProjectType, b: ProjectType) => {
-    if (a.label < b.label) {
+    if (a.name < b.name) {
       return -1;
     }
-    if (a.label > b.label) {
+    if (a.name > b.name) {
       return 1;
     }
     return 0;
   });
 
-  const data = paginate(projectTypeOptions, 8, page);
+  let data: ProjectType[] = projectTypeOptions;
 
-  projectTypeOptions = data.data;
+  if (searchTerm) {
+    // filter options by name
 
-  if (page > 1) {
-    // add previous page option
-
-    projectTypeOptions.unshift({
-      value: "previouspage",
-      label: `👈 PREV PAGE`,
-      hint: "",
-      cli: "",
+    data = data.filter((option: ProjectType) => {
+      return option.name.toLowerCase().includes(searchTerm.toLowerCase());
     });
+
+    if (data.length === 0) {
+      log.error(`No results found for ${color.cyan(searchTerm as string)}!`);
+    }
+
+    isSearch = true;
   }
 
-  if (!data.is_last_page) {
+  data = data.map((option: ProjectType) => {
+    return {
+      ...option,
+      label: `${option.category}: ${option.name}`,
+    };
+  });
+
+  const paginatedData = paginate(data, dataPerPage, pageMainMenuOptions);
+
+  if (!paginatedData.is_last_page) {
     // add next page option
 
-    projectTypeOptions.push({
+    paginatedData.data.unshift({
       value: "nextpage",
       label: `👉 NEXT PAGE`,
       hint: "",
@@ -59,33 +75,58 @@ function mainMenuOptions(projectTypeOptions: ProjectType[]): ProjectType[] {
     });
   }
 
+  if (pageMainMenuOptions > 1) {
+    // add previous page option
+
+    paginatedData.data.unshift({
+      value: "previouspage",
+      label: `👈 PREV PAGE`,
+      hint: "",
+      cli: "",
+    });
+  }
+
   // add search by free text option
 
-  projectTypeOptions.unshift({
+  paginatedData.data.unshift({
     value: "search",
     label: `🔍 SEARCH`,
     hint: "",
     cli: "",
   });
 
+  if (isSearch) {
+    // add reset search option
+
+    paginatedData.data.unshift({
+      value: "resetsearch",
+      label: `🔙 RESET SEARCH`,
+      hint: "",
+      cli: "",
+    });
+  }
+
   // add quit option
 
-  projectTypeOptions.push({
+  paginatedData.data.push({
     value: "quit",
     label: `👋 QUIT`,
     hint: "",
     cli: "",
   });
 
-  return projectTypeOptions;
+  return paginatedData.data;
 }
 
-export async function mainMenu(options: ProjectType[]): Promise<void> {
+export async function mainMenu(
+  options: ProjectType[],
+  searchTerm?: string
+): Promise<void> {
   // construct menu options and show menu
 
   const selectedMenuValue = await select({
     message: "Which framework do you want to use?",
-    options: mainMenuOptions(options),
+    options: mainMenuOptions(options, searchTerm),
   });
 
   if (isCancel(selectedMenuValue)) {
@@ -97,22 +138,22 @@ export async function mainMenu(options: ProjectType[]): Promise<void> {
   }
 
   if (selectedMenuValue === "nextpage") {
-    page++;
+    pageMainMenuOptions++;
 
     mainMenu(options);
     return;
   }
 
   if (selectedMenuValue === "previouspage") {
-    page--;
+    pageMainMenuOptions--;
 
     mainMenu(options);
     return;
   }
 
   if (selectedMenuValue === "search") {
-    const searchValue = await text({
-      message: "Search by free text?",
+    const searchTerm = await text({
+      message: "Search by framework name",
       placeholder:
         "e.g. react or redux or vue or svelte or any other framework name",
       validate: (value: string) => {
@@ -120,21 +161,21 @@ export async function mainMenu(options: ProjectType[]): Promise<void> {
       },
     });
 
-    if (isCancel(searchValue)) {
+    if (isCancel(searchTerm)) {
       quit();
     }
 
-    if (searchValue) {
-      options = options.filter((option: ProjectType) =>
-        option.label
-          .toLowerCase()
-          .includes((searchValue as string).toLowerCase())
-      );
+    // handle search
 
-      if (options.length === 0) {
-        log.info(`No results found for ${searchValue as string}`);
-      }
+    if (searchTerm) {
+      mainMenu(options, searchTerm as string);
+      return;
     }
+  }
+
+  if (selectedMenuValue === "resetsearch") {
+    isSearch = false;
+    pageMainMenuOptions = 1;
 
     mainMenu(options);
     return;
@@ -178,7 +219,7 @@ export async function mainMenu(options: ProjectType[]): Promise<void> {
             break;
         }
       }
-    case "react_redux":
+    case "reactredux":
       // show options js or ts
 
       const selectedReactReduxLangType = await select({
@@ -231,7 +272,7 @@ export async function mainMenu(options: ProjectType[]): Promise<void> {
 }
 
 function createProject(project: Project) {
-  log.info(`🚀 Creating ${project.type?.label} project...\n`);
+  log.info(`🚀 Creating ${color.cyan(project.type?.name)} project...\n`);
 
   const child = spawn(`${project.type?.cli} ${project.name as string}`, {
     stdio: "inherit",

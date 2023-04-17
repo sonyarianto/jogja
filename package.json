@@ -9,9 +9,7 @@
     "build": "tsup ./src/ --clean"
   },
   "bin": {
-    "jogja": "./dist/index.js",
-    "yogyakarta": "./dist/index.js",
-    "yogya": "./dist/index.js"
+    "jogja": "./dist/index.js"
   },
   "repository": {
     "type": "git",
