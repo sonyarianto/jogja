@@ -11,6 +11,7 @@ export const projectTypeOptions = [
     hint: "Deliver web apps with confidence",
     cli: "npm init @angular",
     category: "JS",
+    label: "",
   },
   {
     value: "nextjs",
@@ -18,6 +19,7 @@ export const projectTypeOptions = [
     hint: "The React framework for the web",
     cli: "npx create-next-app@latest",
     category: "JS",
+    label: "",
   },
   {
     value: "nuxt",
@@ -25,6 +27,7 @@ export const projectTypeOptions = [
     hint: "The intuitive Vue framework",
     cli: "npx create-nuxt-app",
     category: "JS",
+    label: "",
   },
   {
     value: "remix",
@@ -32,6 +35,7 @@ export const projectTypeOptions = [
     hint: "Build better websites. Create modern, resilient user experiences with web fundamentals",
     cli: "npx create-remix@latest",
     category: "JS",
+    label: "",
   },
   {
     value: "svelte",
@@ -39,6 +43,7 @@ export const projectTypeOptions = [
     hint: "Rapidly developing robust, performant web applications using Svelte",
     cli: "npm create svelte@latest",
     category: "JS",
+    label: "",
   },
   {
     value: "vuejs",
@@ -46,6 +51,7 @@ export const projectTypeOptions = [
     hint: "The progressive JavaScript framework",
     cli: "npm init vue@latest",
     category: "JS",
+    label: "",
   },
   {
     value: "astro",
@@ -53,6 +59,7 @@ export const projectTypeOptions = [
     hint: "Build the web you want",
     cli: "npm create astro@latest",
     category: "JS",
+    label: "",
   },
   {
     value: "nestjs",
@@ -60,6 +67,7 @@ export const projectTypeOptions = [
     hint: "A progressive Node.js framework",
     cli: "npx nest new",
     category: "JS",
+    label: "",
   },
   {
     value: "emberjs",
@@ -67,6 +75,7 @@ export const projectTypeOptions = [
     hint: "A framework for ambitious web developers",
     cli: "npx ember new",
     category: "JS",
+    label: "",
   },
   {
     value: "gatsby",
@@ -74,6 +83,7 @@ export const projectTypeOptions = [
     hint: "The fastest frontend for the headless web",
     cli: "npx gatsby new",
     category: "JS",
+    label: "",
   },
   {
     value: "qwik",
@@ -81,6 +91,7 @@ export const projectTypeOptions = [
     hint: "Framework reimagined for the edge!",
     cli: "npm create qwik@latest",
     category: "JS",
+    label: "",
   },
   {
     value: "sails",
@@ -88,6 +99,7 @@ export const projectTypeOptions = [
     hint: "Realtime MVC framework for Node.js",
     cli: "npx sails new",
     category: "JS",
+    label: "",
   },
   {
     value: "vite",
@@ -95,6 +107,7 @@ export const projectTypeOptions = [
     hint: "Next Generation Frontend Tooling",
     cli: "npm create vite@latest",
     category: "JS",
+    label: "",
   },
   {
     value: "aurelia",
@@ -102,6 +115,7 @@ export const projectTypeOptions = [
     hint: "Simple. Powerful. Unobtrusive.",
     cli: "npx aurelia-cli new",
     category: "JS",
+    label: "",
   },
   {
     value: "solidstart",
@@ -109,6 +123,7 @@ export const projectTypeOptions = [
     hint: "The Solid app framework",
     cli: "npm init solid@latest",
     category: "JS",
+    label: "",
   },
   {
     value: "preact",
@@ -116,6 +131,7 @@ export const projectTypeOptions = [
     hint: "A different kind of library",
     cli: "npx preact-cli create default",
     category: "JS",
+    label: "",
   },
   {
     value: "createreactapp",
@@ -123,6 +139,7 @@ export const projectTypeOptions = [
     hint: "Set up a modern web app by running one command",
     cli: "npx create-react-app",
     category: "JS",
+    label: "",
   },
   {
     value: "adonisjs",
@@ -130,6 +147,7 @@ export const projectTypeOptions = [
     hint: "A fully featured web framework for Node.js",
     cli: "npm init adonis-ts-app@latest",
     category: "JS",
+    label: "",
   },
   {
     value: "solidjs",
@@ -137,6 +155,7 @@ export const projectTypeOptions = [
     hint: "Reactive Javascript Library",
     cli: "",
     category: "JS",
+    label: "",
   },
   {
     value: "inferno",
@@ -144,6 +163,7 @@ export const projectTypeOptions = [
     hint: "An extremely fast, React-like JavaScript library",
     cli: "npx degit infernojs/inferno-boilerplate",
     category: "JS",
+    label: "",
   },
   {
     value: "reactredux",
@@ -151,6 +171,7 @@ export const projectTypeOptions = [
     hint: "A predictable state container for JavaScript apps",
     cli: "",
     category: "JS",
+    label: "",
   },
   {
     value: "expressjs",
@@ -158,6 +179,7 @@ export const projectTypeOptions = [
     hint: "Node.js web application framework",
     cli: "npx express-generator",
     category: "JS",
+    label: "",
   },
   {
     value: "nx",
@@ -165,5 +187,22 @@ export const projectTypeOptions = [
     hint: "Smart, fast and extensible build system",
     cli: "npx create-nx-workspace@latest",
     category: "JS",
+    label: "",
+  },
+  {
+    value: "blitzjs",
+    name: "Blitz.js",
+    hint: "The missing fullstack toolkit for Next.js",
+    cli: "npx blitz new",
+    category: "JS",
+    label: "",
+  },
+  {
+    value: "vitepress",
+    name: "VitePress",
+    hint: "Vite & Vue powered static site generator",
+    cli: "npx vitepress init",
+    category: "JS",
+    label: "",
   },
 ];

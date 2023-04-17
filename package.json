@@ -6,7 +6,10 @@
   "scripts": {
     "start": "jiti ./src/index.ts",
     "format": "prettier --write ./src",
-    "build": "tsup ./src/ --clean"
+    "build": "tsup ./src/ --clean",
+    "docs:dev": "vitepress dev jogja_vitepress",
+    "docs:build": "vitepress build jogja_vitepress",
+    "docs:preview": "vitepress preview jogja_vitepress"
   },
   "bin": {
     "jogja": "./dist/index.js"

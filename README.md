@@ -28,28 +28,28 @@ Every web framework has their own cli to create project. Jogja will trigger the 
 
 ## Features
 
-- Trigger create project for Next.js, SvelteKit, Vue.js, Astro, Remix, Nuxt and many more.
+- Trigger create project for AdonisJS, Angular, Astro, Aurelia, Ember.js, Express.js, Gatsby, Inferno, NestJS, Next.js, Nuxt.js, Nx, Preact, Qwik, React (creact-react-app/CRA), React Redux, Remix, Sails, SolidJS, SolidStart, SvelteKit, Vite, VitePress, Vue.js
 
 ## Installation
 
-Install it globally
+Install it globally.
 
 ```
 npm i -g jogja
 ```
 
-Now you can call it by type `jogja` on your computer. Use keyboard (up and down key) to select options.
+Now you can call it by type `jogja` on your computer. Use keyboard (up, down and enter key) to select options.
 
 ## Screenshot
 
-![Jogja](https://github.com/sonyarianto/jogja/blob/main/jogja-0.2.5.jpg?raw=true)
+![Jogja](https://github.com/sonyarianto/jogja/blob/main/jogja-0.2.7.jpg?raw=true)
 
 ## FAQs
 
 - **How to update?** Just run `npm i -g jogja` again. It will update the package to the latest version.
 - **How to add new framework?** You can create PR to add new framework. Or you can create issue to request new framework.
 - **I want to install non-JavaScript framework. Can I?** You can't at the moment. Support for other languages/frameworks will be added in the future.
-- **Why the name is Jogja?** Jogja a.k.a Yogyakarta is the name of city in Indonesia. I want to make this project as a tribute to the city.
+- **Why the name is `jogja`?** Jogja a.k.a Yogyakarta is the name of city in Indonesia. I want to make this project as a tribute to the city.
 
 ## License
 

@@ -192,7 +192,8 @@ export async function mainMenu(
   switch (selectedMenuValue) {
     case "qwik":
     case "nx":
-      // for qwik and nx, the project name will be handled by the cli itself
+    case "vitepress":
+      // for qwik, nx and vitepress, the project name will be handled by the cli itself
       break;
     case "solidjs":
       // show options js or ts
