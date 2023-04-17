@@ -205,4 +205,12 @@ export const projectTypeOptions = [
     category: "JS",
     label: "",
   },
+  {
+    value: "openwebcomponents",
+    name: "Open Web Components",
+    hint: "Web component project scaffolding",
+    cli: "npm init @open-wc",
+    category: "JS",
+    label: "",
+  },
 ];

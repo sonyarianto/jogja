@@ -193,7 +193,8 @@ export async function mainMenu(
     case "qwik":
     case "nx":
     case "vitepress":
-      // for qwik, nx and vitepress, the project name will be handled by the cli itself
+    case "openwebcomponents":
+      // for Qwik, Nx, VitePress and Open Web Components, the project name will be handled by the cli itself
       break;
     case "solidjs":
       // show options js or ts
