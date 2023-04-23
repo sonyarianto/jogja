@@ -53,6 +53,7 @@ function mainMenuOptions(
     }
 
     isSearch = true;
+    pageMainMenuOptions = 1;
   }
 
   data = data.map((option: ProjectType) => {
