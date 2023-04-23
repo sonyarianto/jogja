@@ -23,7 +23,8 @@
     "generator",
     "framework",
     "tooling",
-    "cli"
+    "cli",
+    "scaffolding"
   ],
   "author": "Sony Arianto Kurniawan <sony@sony-ak.com>",
   "license": "MIT",

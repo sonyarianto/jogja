@@ -213,4 +213,12 @@ export const projectTypeOptions = [
     category: "JS",
     label: "",
   },
+  {
+    value: "docusaurus",
+    name: "Docusaurus",
+    hint: "Build optimized websites quickly, focus on your content",
+    cli: "npx create-docusaurus@latest",
+    category: "JS",
+    label: "",
+  },
 ];
