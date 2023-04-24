@@ -6,10 +6,7 @@
   "scripts": {
     "start": "jiti ./src/index.ts",
     "format": "prettier --write ./src",
-    "build": "tsup ./src/ --clean",
-    "docs:dev": "vitepress dev jogja_vitepress",
-    "docs:build": "vitepress build jogja_vitepress",
-    "docs:preview": "vitepress preview jogja_vitepress"
+    "build": "tsup ./src/ --clean"
   },
   "bin": {
     "jogja": "./dist/index.js"
@@ -24,7 +21,8 @@
     "framework",
     "tooling",
     "cli",
-    "scaffolding"
+    "scaffolding",
+    "yeoman"
   ],
   "author": "Sony Arianto Kurniawan <sony@sony-ak.com>",
   "license": "MIT",
@@ -34,7 +32,7 @@
   "homepage": "https://github.com/sonyarianto/jogja#readme",
   "devDependencies": {
     "jiti": "^1.18.2",
-    "prettier": "^2.8.7",
+    "prettier": "^2.8.8",
     "tsup": "^6.7.0"
   },
   "dependencies": {

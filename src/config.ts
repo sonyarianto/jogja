@@ -221,4 +221,28 @@ export const projectTypeOptions = [
     category: "JS",
     label: "",
   },
+  {
+    value: "hexo",
+    name: "Hexo",
+    hint: "A fast, simple & powerful blog framework",
+    cli: "npx hexo-cli init",
+    category: "JS",
+    label: "",
+  },
+  {
+    value: "vuepress",
+    name: "VuePress",
+    hint: "Vue-powered static site generator",
+    cli: "npx create-vuepress-site",
+    category: "JS",
+    label: "",
+  },
+  {
+    value: "gridsome",
+    name: "Gridsome",
+    hint: "Modern site generator for Vue.js",
+    cli: "npx @gridsome/cli create",
+    category: "JS",
+    label: "",
+  },
 ];
