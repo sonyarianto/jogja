@@ -245,4 +245,12 @@ export const projectTypeOptions = [
     category: "JS",
     label: "",
   },
+  {
+    value: "analogjs",
+    name: "Analog",
+    hint: "The fullstack Angular meta-framework",
+    cli: "npm create analog@latest",
+    category: "JS",
+    label: "",
+  },
 ];
