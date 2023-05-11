@@ -319,6 +319,9 @@ function nitroOnFinished(project: Project) {
 }
 
 function quit() {
+  log.info(
+    `Go to https://github.com/sonyarianto/jogja to submit an issue or contribute.`
+  );
   outro(`🙏 Thank you for using ${color.bgCyan(color.black(` ${appName} `))}!`);
   process.exit(0);
 }
