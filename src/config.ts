@@ -253,4 +253,12 @@ export const projectTypeOptions = [
     category: "JS",
     label: "",
   },
+  {
+    value: "nitro",
+    name: "Nitro",
+    hint: "Create web servers that run anywhere",
+    cli: "npx giget@latest nitro",
+    category: "JS",
+    label: "",
+  },
 ];

@@ -288,6 +288,8 @@ function createProject(project: Project) {
         solidJsOnFinished(project);
       case "inferno":
         infernoOnFinished(project);
+      case "nitro":
+        nitroOnFinished(project);
       default:
         quit();
         break;
@@ -307,6 +309,13 @@ function infernoOnFinished(project: Project) {
   console.log(`1. cd ${project.name as string}`);
   console.log(`2. npm install`);
   console.log(`3. npm run start\n`);
+}
+
+function nitroOnFinished(project: Project) {
+  console.log(`\nWhat to do next?`);
+  console.log(`1. cd ${project.name as string}`);
+  console.log(`2. npm install`);
+  console.log(`3. npm run dev\n`);
 }
 
 function quit() {
