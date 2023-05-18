@@ -51,6 +51,14 @@ Now you can call it by type `jogja` on your computer. Use keyboard (up, down and
 - **I want to install non-JavaScript framework. Can I?** You can't at the moment. Support for other languages/frameworks will be added in the future.
 - **Why the name is `jogja`?** Jogja a.k.a Yogyakarta is the name of city in Indonesia. I want to make this project as a tribute to the city.
 
+## Contributing
+
+Contributions are welcome! Open a pull request to fix a bug, or open an issue to discuss a new feature or change. Usually I run this command on local machine to test the changes.
+
+```
+npx jiti ./src/index.ts
+```
+
 ## License
 
 MIT
