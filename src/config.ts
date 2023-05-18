@@ -285,4 +285,20 @@ export const projectTypeOptions = [
     category: "JS",
     label: "",
   },
+  {
+    value: "medusa",
+    name: "Medusa",
+    hint: "Building blocks for digital commerce",
+    cli: "npx create-medusa-app",
+    category: "JS",
+    label: "",
+  },
+  {
+    value: "vuetify",
+    name: "Vuetify",
+    hint: "A Vue Component Framework",
+    cli: "npx create-vuetify",
+    category: "JS",
+    label: "",
+  },
 ];
