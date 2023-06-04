@@ -28,7 +28,7 @@ Every web framework has their own cli to create project. Jogja will trigger the 
 
 ## Features
 
-- Trigger create project for AdonisJS, Analog, Angular, Astro, Aurelia, Docusaurus, Ember.js, Express.js, Gatsby, Gridsome, Hexo, Inferno, Medusa, NestJS, Next.js, Nitro, Nuxt.js, Nx, Preact, Qwik, React (creact-react-app/CRA), React Redux, RedwoodJS, Remix, Sails, SolidJS, SolidStart, Stencil, SvelteKit, Vite, VitePress, Vue.js, VuePress, Vuetify
+- Trigger create project for AdonisJS, Analog, Angular, Astro, Aurelia, Docusaurus, Ember.js, Expo, Express.js, Gatsby, Gridsome, Hexo, Inferno, Medusa, NestJS, Next.js, Nitro, Nuxt.js, Nx, Preact, Qwik, React (creact-react-app/CRA), React Redux, RedwoodJS, Remix, Sails, SolidJS, SolidStart, Stencil, SvelteKit, Vite, VitePress, Vue.js, VuePress, Vuetify
 
 ## Installation
 
@@ -53,11 +53,17 @@ Now you can call it by type `jogja` on your computer. Use keyboard (up, down and
 
 ## Contributing
 
-Contributions are welcome! Open a pull request to fix a bug, or open an issue to discuss a new feature or change. Usually I run this command on local machine to test the changes.
+Contributions are welcome! Open a pull request to fix a bug, or open an issue to discuss a new feature or change.
+
+## How to look into the code?
+
+File `src/index.ts` is the entry point of this software. So usually to run locally I am doing this.
 
 ```
 npx jiti ./src/index.ts
 ```
+
+So `jiti` is runtime TypeScript and ESM support for Node.js. I use that I love it.
 
 ## License
 

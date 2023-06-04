@@ -301,4 +301,12 @@ export const projectTypeOptions = [
     category: "JS",
     label: "",
   },
+  {
+    value: "expo",
+    name: "Expo",
+    hint: "Make any app. Run it everywhere.",
+    cli: "npx create-expo-app",
+    category: "JS",
+    label: "",
+  },
 ];
