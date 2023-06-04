@@ -53,7 +53,7 @@ Now you can call it by type `jogja` on your computer. Use keyboard (up, down and
 
 ## Contributing
 
-Contributions are welcome! Open a pull request to fix a bug, or open an issue to discuss a new feature or change.
+Contributions are welcome! Open a pull request to fix a bug, or open an issue to discuss new feature or changes.
 
 ## How to look into the code?
 
@@ -63,7 +63,7 @@ File `src/index.ts` is the entry point of this software. So usually to run local
 npx jiti ./src/index.ts
 ```
 
-So `jiti` is runtime TypeScript and ESM support for Node.js. I use that I love it.
+So `jiti` is runtime TypeScript and ESM support for Node.js. I use that and I love it.
 
 ## License
 
