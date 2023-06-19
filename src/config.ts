@@ -309,4 +309,12 @@ export const projectTypeOptions = [
     category: "JS",
     label: "",
   },
+  {
+    value: "fastify",
+    name: "Fastify",
+    hint: "Fast and low overhead web framework, for Node.js",
+    cli: "npx fastify-cli generate",
+    category: "JS",
+    label: "",
+  },
 ];
