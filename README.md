@@ -5,7 +5,7 @@
   <img alt="GitHub Sponsors" src="https://img.shields.io/github/sponsors/sonyarianto">
 </a>
 <a href="https://discord.com/channels/1124551411384975442/1089563520988893306/" target="_blank">
-  <img alt="Discord" src="https://img.shields.io/discord/1124551411384975442">
+  <img alt="Discord" src="https://img.shields.io/discord/1089563520988893306">
 </a>
 <a href="https://www.npmjs.com/package/jogja" target="_blank">
  <img alt="npm" src="https://img.shields.io/npm/dt/jogja">
