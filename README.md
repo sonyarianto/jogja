@@ -4,7 +4,7 @@
 <a href="https://github.com/sponsors/sonyarianto" target="_blank">
   <img alt="GitHub Sponsors" src="https://img.shields.io/github/sponsors/sonyarianto">
 </a>
-<a href="https://discord.com/channels/1124551411384975442/1089563520988893306/" target="_blank">
+<a href="https://discord.gg/5Xj7HRMC34" target="_blank">
   <img alt="Discord" src="https://img.shields.io/discord/1089563520988893306">
 </a>
 <a href="https://www.npmjs.com/package/jogja" target="_blank">
