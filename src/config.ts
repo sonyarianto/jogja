@@ -324,5 +324,5 @@ export const projectTypeOptions = [
     cli: "npx create-alpine-app",
     category: "JS",
     label: "",
-  }
+  },
 ];
