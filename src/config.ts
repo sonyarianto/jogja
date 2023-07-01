@@ -317,4 +317,12 @@ export const projectTypeOptions = [
     category: "JS",
     label: "",
   },
+  {
+    value: "alpinejs",
+    name: "Alpine.js",
+    hint: "A rugged, minimal tool for composing behavior directly in your markup.",
+    cli: "npx create-alpine-app",
+    category: "JS",
+    label: "",
+  }
 ];
