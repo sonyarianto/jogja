@@ -28,7 +28,7 @@ Every web framework has their own cli to create project. Jogja will trigger the 
 
 ## Features
 
-- Trigger create project for AdonisJS, Alpine.js, Analog, Angular, Astro, Aurelia, Docusaurus, Ember.js, Expo, Express.js, Fastify, Gatsby, Gridsome, Hexo, Inferno, Medusa, NestJS, Next.js, Nitro, Nuxt.js, Nx, Preact, Qwik, React (creact-react-app/CRA), React Redux, RedwoodJS, Remix, Sails, SolidJS, SolidStart, Stencil, SvelteKit, Vite, VitePress, Vue.js, VuePress, Vuetify.
+- Trigger create project for AdonisJS, Alpine.js, Analog, Angular, Astro, Aurelia, Docusaurus, Ember.js, Expo, Express.js, Fastify, Gatsby, Gridsome, Hexo, Hono, Inferno, Medusa, NestJS, Next.js, Nitro, Nuxt.js, Nx, Preact, Qwik, React (creact-react-app/CRA), React Redux, RedwoodJS, Remix, Sails, SolidJS, SolidStart, Stencil, SvelteKit, Vite, VitePress, Vue.js, VuePress, Vuetify.
 - Navigate using keyboard (up and down key).
 
 ## Installation
@@ -43,7 +43,7 @@ Now you can call it by type `jogja` on your computer. Use keyboard (up, down and
 
 ## Screenshot
 
-![Jogja](https://github.com/sonyarianto/jogja/blob/main/jogja-0.2.7.jpg?raw=true)
+![Jogja](https://github.com/sonyarianto/jogja/blob/main/jogja.png?raw=true&assets_version=202309101654)
 
 ## FAQs
 

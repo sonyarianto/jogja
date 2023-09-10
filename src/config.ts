@@ -285,4 +285,11 @@ export const projectTypeOptions = [
     cli: "npx create-alpine-app",
     category: "JS",
   },
+  {
+    value: "hono",
+    label: "Hono",
+    hint: "A small, simple, and ultrafast web framework for the edges.",
+    cli: "npm create hono@latest",
+    category: "JS",
+  }
 ];
