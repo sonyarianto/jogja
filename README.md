@@ -60,11 +60,12 @@ Contributions are welcome! Open a pull request to fix a bug, or open an issue to
 
 File `src/index.ts` is the entry point of this software. So usually to run locally I am doing this.
 
-```
+```bash
 npx jiti ./src/index.ts
+// or npm run start
 ```
 
-So `jiti` is runtime TypeScript and ESM support for Node.js. I use that and I love it.
+`jiti` is runtime TypeScript and ESM support for Node.js. I use that and I love it.
 
 ## License
 
