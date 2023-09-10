@@ -59,7 +59,7 @@ function mainMenuOptions(
   data = data.map((option: ProjectType) => {
     return {
       ...option,
-      label: `${option.category}: ${option.name}`,
+      label: `${option.name}`,
     };
   });
 
