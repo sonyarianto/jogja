@@ -18,7 +18,6 @@ type Project = {
   name: ProjectName;
 };
 
-let pageMainMenuOptions: number = 1;
 let isSearch: boolean = false;
 
 function sortMenuOptions(projectTypeOptions: ProjectType[]): ProjectType[] {
@@ -52,7 +51,6 @@ function searchMenuOptions(
   }
 
   isSearch = true;
-  pageMainMenuOptions = 1;
 
   return projectTypeOptions;
 }
@@ -160,7 +158,6 @@ export async function mainMenu(
 
     if (searchTerm === "cancel") {
       isSearch = false;
-      pageMainMenuOptions = 1;
 
       mainMenu(options);
       return;
@@ -180,7 +177,6 @@ export async function mainMenu(
 
   if (selectedMenuValue === "resetsearch") {
     isSearch = false;
-    pageMainMenuOptions = 1;
 
     mainMenu(options);
     return;
@@ -327,7 +323,7 @@ function nitroOnFinished(project: Project) {
 }
 
 function quit() {
-  log.info(
+  log.message(
     `Go to https://github.com/sonyarianto/jogja to submit an issue or contribute.`,
   );
   outro(`🙏 Thank you for using ${color.bgCyan(color.black(` ${appName} `))}!`);
