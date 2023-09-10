@@ -67,7 +67,7 @@ function mainMenuOptions(
 
   // handle search
 
-  if (searchTerm) {
+  if (searchTerm && searchTerm.trim() !== "") {
     projectTypeOptions = searchMenuOptions(projectTypeOptions, searchTerm);
   }
 
@@ -152,11 +152,19 @@ export async function mainMenu(
     const searchTerm = await text({
       message: "Search by framework name",
       placeholder:
-        "e.g. react or redux or vue or svelte or any other framework name",
+        "e.g. react or any other framework name or type 'cancel' to back to main menu",
       validate: (value: string) => {
         if (value.trim() === "") return "Please enter a valid search term";
       },
     });
+
+    if (searchTerm === "cancel") {
+      isSearch = false;
+      pageMainMenuOptions = 1;
+
+      mainMenu(options);
+      return;
+    }
 
     if (isCancel(searchTerm)) {
       quit();
