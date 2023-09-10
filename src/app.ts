@@ -1,15 +1,13 @@
 import { isCancel, log, outro, select, text } from "@clack/prompts";
-import { appName, dataPerPage } from "./config";
+import { appName, dataPerPage, projectTypeOptions } from "./config";
 import color from "picocolors";
 import { spawn } from "child_process";
-import { paginate } from "./utils";
 
 type ProjectType = {
   value: string;
-  name: string;
   hint: string;
   cli: string;
-  category: string;
+  category?: string;
   label: string;
 };
 
@@ -23,111 +21,123 @@ type Project = {
 let pageMainMenuOptions: number = 1;
 let isSearch: boolean = false;
 
-function mainMenuOptions(
-  projectTypeOptions: ProjectType[],
-  searchTerm?: string
-): ProjectType[] {
-  // sort options by name
+function sortMenuOptions(projectTypeOptions: ProjectType[]): ProjectType[] {
+  // sort options by label
 
   projectTypeOptions.sort((a: ProjectType, b: ProjectType) => {
-    if (a.name < b.name) {
+    if (a.label < b.label) {
       return -1;
     }
-    if (a.name > b.name) {
+    if (a.label > b.label) {
       return 1;
     }
     return 0;
   });
 
-  let data: ProjectType[] = projectTypeOptions;
+  return projectTypeOptions;
+}
+
+function searchMenuOptions(
+  projectTypeOptions: ProjectType[],
+  searchTerm: string,
+): ProjectType[] {
+  // filter options by label
+
+  projectTypeOptions = projectTypeOptions.filter((option: ProjectType) => {
+    return option.label.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
+  if (projectTypeOptions.length === 0) {
+    log.error(`No results found for ${color.cyan(searchTerm as string)}!`);
+  }
+
+  isSearch = true;
+  pageMainMenuOptions = 1;
+
+  return projectTypeOptions;
+}
+
+function mainMenuOptions(
+  projectTypeOptions: ProjectType[],
+  searchTerm?: string,
+): ProjectType[] {
+  // sort options by label
+
+  projectTypeOptions = sortMenuOptions(projectTypeOptions);
+
+  // handle search
 
   if (searchTerm) {
-    // filter options by name
-
-    data = data.filter((option: ProjectType) => {
-      return option.name.toLowerCase().includes(searchTerm.toLowerCase());
-    });
-
-    if (data.length === 0) {
-      log.error(`No results found for ${color.cyan(searchTerm as string)}!`);
-    }
-
-    isSearch = true;
-    pageMainMenuOptions = 1;
+    projectTypeOptions = searchMenuOptions(projectTypeOptions, searchTerm);
   }
 
-  data = data.map((option: ProjectType) => {
-    return {
-      ...option,
-      label: `${option.name}`,
-    };
-  });
+  return projectTypeOptions;
+}
 
-  const paginatedData = paginate(data, dataPerPage, pageMainMenuOptions);
+function renderedMainMenuOptions(
+  projectTypeOptions: ProjectType[],
+): ProjectType[] {
+  if (
+    !projectTypeOptions.find((option: ProjectType) => option.value === "search")
+  ) {
+    projectTypeOptions.unshift({
+      value: "search",
+      label: `🔍 SEARCH`,
+      hint: "",
+      cli: "",
+    });
 
-  if (!paginatedData.is_last_page) {
-    // add next page option
+    projectTypeOptions.push({
+      value: "search",
+      label: `🔍 SEARCH`,
+      hint: "",
+      cli: "",
+    });
 
-    paginatedData.data.unshift({
-      value: "nextpage",
-      label: `👉 NEXT PAGE`,
+    projectTypeOptions.push({
+      value: "quit",
+      label: `👋 QUIT`,
       hint: "",
       cli: "",
     });
   }
-
-  if (pageMainMenuOptions > 1) {
-    // add previous page option
-
-    paginatedData.data.unshift({
-      value: "previouspage",
-      label: `👈 PREV PAGE`,
-      hint: "",
-      cli: "",
-    });
-  }
-
-  // add search by free text option
-
-  paginatedData.data.unshift({
-    value: "search",
-    label: `🔍 SEARCH`,
-    hint: "",
-    cli: "",
-  });
 
   if (isSearch) {
-    // add reset search option
+    // add reset search option if value resetsearch is not found
 
-    paginatedData.data.unshift({
-      value: "resetsearch",
-      label: `🔙 RESET SEARCH`,
-      hint: "",
-      cli: "",
-    });
+    if (
+      !projectTypeOptions.find(
+        (option: ProjectType) => option.value === "resetsearch",
+      )
+    ) {
+      projectTypeOptions.unshift({
+        value: "resetsearch",
+        label: `🔙 RESET SEARCH`,
+        hint: "",
+        cli: "",
+      });
+    }
   }
 
-  // add quit option
-
-  paginatedData.data.push({
-    value: "quit",
-    label: `👋 QUIT`,
-    hint: "",
-    cli: "",
-  });
-
-  return paginatedData.data;
+  return projectTypeOptions;
 }
 
 export async function mainMenu(
   options: ProjectType[],
-  searchTerm?: string
+  searchTerm?: string,
 ): Promise<void> {
   // construct menu options and show menu
 
+  let projectTypeOptions: ProjectType[] = JSON.parse(
+    JSON.stringify(mainMenuOptions(options, searchTerm)),
+  );
+
+  projectTypeOptions = renderedMainMenuOptions(projectTypeOptions);
+
   const selectedMenuValue = await select({
     message: "Which framework do you want to use?",
-    options: mainMenuOptions(options, searchTerm),
+    options: projectTypeOptions,
+    maxItems: dataPerPage,
   });
 
   if (isCancel(selectedMenuValue)) {
@@ -136,20 +146,6 @@ export async function mainMenu(
 
   if (selectedMenuValue === "quit") {
     quit();
-  }
-
-  if (selectedMenuValue === "nextpage") {
-    pageMainMenuOptions++;
-
-    mainMenu(options);
-    return;
-  }
-
-  if (selectedMenuValue === "previouspage") {
-    pageMainMenuOptions--;
-
-    mainMenu(options);
-    return;
   }
 
   if (selectedMenuValue === "search") {
@@ -185,7 +181,7 @@ export async function mainMenu(
   let selectedProjectType: ProjectType | null | undefined = null;
 
   selectedProjectType = options.find(
-    (option: ProjectType) => option.value === selectedMenuValue
+    (option: ProjectType) => option.value === selectedMenuValue,
   );
 
   let selectedProjectName: ProjectName = "";
@@ -279,7 +275,7 @@ export async function mainMenu(
 }
 
 function createProject(project: Project) {
-  log.info(`🚀 Creating ${color.cyan(project.type?.name)} project...\n`);
+  log.info(`🚀 Creating ${color.cyan(project.type?.label)} project...\n`);
 
   const child = spawn(`${project.type?.cli} ${project.name as string}`, {
     stdio: "inherit",
@@ -324,7 +320,7 @@ function nitroOnFinished(project: Project) {
 
 function quit() {
   log.info(
-    `Go to https://github.com/sonyarianto/jogja to submit an issue or contribute.`
+    `Go to https://github.com/sonyarianto/jogja to submit an issue or contribute.`,
   );
   outro(`🙏 Thank you for using ${color.bgCyan(color.black(` ${appName} `))}!`);
   process.exit(0);

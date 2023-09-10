@@ -15,10 +15,10 @@ async function main() {
   intro(`${color.bgCyan(color.black(` ${appName} `))}`);
   log.message(
     `Project generator for web frameworks. Use ${color.cyan(
-      `arrow keys`
+      `arrow keys`,
     )} to navigate and press enter to select. ${color.cyan(
-      `Ctrl+C`
-    )} to exit at any time.`
+      `Ctrl+C`,
+    )} to exit at any time.`,
   );
 
   mainMenu(projectTypeOptions);
