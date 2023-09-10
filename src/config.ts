@@ -291,5 +291,5 @@ export const projectTypeOptions = [
     hint: "A small, simple, and ultrafast web framework for the edges.",
     cli: "npm create hono@latest",
     category: "JS",
-  }
+  },
 ];
